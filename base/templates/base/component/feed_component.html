@@ -1,0 +1,50 @@
+{% load static %}
+
+{% for room in rooms %}
+<div class="roomListRoom">
+    <div class="roomListRoom__header">
+
+        <a href="{% url 'user-profile' room.host.id %} " class="roomListRoom__author">
+            <div class="avatar avatar--small">
+                <img src="{% static 'images/ava.jpg' %}" />
+            </div>
+            <span>@{{room.host}}</span>
+        </a>
+        <div class="roomListRoom__actions">
+            <span>{{room.created|timesince}}</span>
+        </div>
+    </div>
+
+    <div class="roomListRoom__content">
+        <a href="{% url 'room' room.id %}">{{room.name}}</a>
+    </div>
+
+    <div class="roomListRoom__joined">
+        <p>
+            {{room.description}}
+        </p>
+    </div>
+
+    <div class="roomListRoom__meta">
+        <a href="{% url 'room' room.id %}" class="roomListRoom__joined">
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 576 512">
+                <title>user-group</title>
+                <path
+                    d="M160 256C160 185.3 217.3 128 288 128C358.7 128 416 185.3 416 256C416 326.7 358.7 384 288 384C217.3 384 160 326.7 160 256zM288 336C332.2 336 368 300.2 368 256C368 211.8 332.2 176 288 176C287.3 176 286.7 176 285.1 176C287.3 181.1 288 186.5 288 192C288 227.3 259.3 256 224 256C218.5 256 213.1 255.3 208 253.1C208 254.7 208 255.3 208 255.1C208 300.2 243.8 336 288 336L288 336zM95.42 112.6C142.5 68.84 207.2 32 288 32C368.8 32 433.5 68.84 480.6 112.6C527.4 156 558.7 207.1 573.5 243.7C576.8 251.6 576.8 260.4 573.5 268.3C558.7 304 527.4 355.1 480.6 399.4C433.5 443.2 368.8 480 288 480C207.2 480 142.5 443.2 95.42 399.4C48.62 355.1 17.34 304 2.461 268.3C-.8205 260.4-.8205 251.6 2.461 243.7C17.34 207.1 48.62 156 95.42 112.6V112.6zM288 80C222.8 80 169.2 109.6 128.1 147.7C89.6 183.5 63.02 225.1 49.44 256C63.02 286 89.6 328.5 128.1 364.3C169.2 402.4 222.8 432 288 432C353.2 432 406.8 402.4 447.9 364.3C486.4 328.5 512.1 286 526.6 256C512.1 225.1 486.4 183.5 447.9 147.7C406.8 109.6 353.2 80 288 80V80z" />
+            </svg>
+            {{room.participants.all.count}}
+            <p> </p>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                <path
+                    d="M256 32C114.6 32 .0272 125.1 .0272 240c0 47.63 19.91 91.25 52.91 126.2c-14.88 39.5-45.87 72.88-46.37 73.25c-6.625 7-8.375 17.25-4.625 26C5.818 474.2 14.38 480 24 480c61.5 0 109.1-25.75 139.1-46.25C191.1 442.8 223.3 448 256 448c141.4 0 255.1-93.13 255.1-208S397.4 32 256 32zM256.1 400c-26.75 0-53.12-4.125-78.38-12.12l-22.75-7.125l-19.5 13.75c-14.25 10.12-33.88 21.38-57.5 29c7.375-12.12 14.37-25.75 19.88-40.25l10.62-28l-20.62-21.87C69.82 314.1 48.07 282.2 48.07 240c0-88.25 93.25-160 208-160s208 71.75 208 160S370.8 400 256.1 400z" />
+            </svg>
+            {% for a in post %}
+            {% if a.id == room.id %}
+            {{a.ratings}}
+            {% endif %}
+            {% endfor %}
+        </a>
+        <p class="roomListRoom__topic">{{room.topic.topic}}</p>
+    </div>
+</div>
+{% endfor %}

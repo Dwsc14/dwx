@@ -1,0 +1,73 @@
+{% extends "main.html" %}
+{% load static %}
+
+{% block content %}
+<main class="profile-page layout layout--3">
+    <div class="container">
+        {% include "base/component/topic_component.html" %}
+
+        <div class="roomList">
+            <div class="profile">
+                <div class="profile__avatar">
+                    <div class="avatar avatar--large active">
+                        <img src="{% static 'images/ava.jpg' %}" />
+                    </div>
+                </div>
+                <div class="profile__info">
+                    <h3>{{user.name}}</h3>
+                    <p>@{{user.username}}</p>
+                    {% if request.user == user %}
+                    <a href="{% url 'update-profile' %}" class="btn btn--main btn--pill">Edit Profile</a>
+                    {% endif %}
+                </div>
+                <div class="profile__about">
+                    <h3>About</h3>
+                    <p>
+                        None
+                    </p>
+                </div>
+            </div>
+
+            <div class="roomList__header">
+                <div>
+                    <h2>Post</h2>
+                </div>
+            </div>
+
+            {% include "base/component/feed_component.html" %}
+        </div>
+
+        <div>
+            {% include "base/component/activity_component.html" %}
+        </div>
+
+    </div>
+</main>
+{% endblock content %}
+
+
+
+
+<!-- {% block contenta %}
+<style>
+    .profile-container {
+        display: grid;
+        grid-template-columns: 1fr 2fr 1fr;
+    }
+</style>
+<h1>Name: {{user.username}}</h1>
+<div class="profile-container">
+
+    <div>
+        {% include "base/component/topic_component.html" %}
+    </div>
+
+    <div>
+        {% include "base/component/feed_component.html" %}
+    </div>
+
+    <div>
+        {% include "base/component/activity_component.html" %}
+    </div>
+</div>
+{% endblock contenta %} -->

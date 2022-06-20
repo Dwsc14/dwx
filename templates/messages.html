@@ -1,0 +1,8 @@
+{% if messages %}
+{% for message in messages %}
+<div class="alertLayout">
+    <h3>{{ message }}</h3>
+</div>
+
+{% endfor %}
+{% endif %}
